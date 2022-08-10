@@ -1,5 +1,4 @@
-const { Schema, model } = require('mongoose');
-//might not need model;
+const { Schema } = require('mongoose');
 
 
 const reactionSchema = new Schema(
@@ -20,7 +19,7 @@ const reactionSchema = new Schema(
         createdAt: {
             type: Date,
             default: Date.now,
-            //getter method?
+            //get: () => use moment.js
         }
 
     },

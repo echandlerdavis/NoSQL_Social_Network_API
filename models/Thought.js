@@ -12,12 +12,11 @@ const thoughtSchema = new Schema(
         createdAt: {
             type: Date, 
             default: Date.now,
-            //getter method to format the timestamp query?
+            //get: () => (use moment that returns the formatted date and time)
         },
         username: {
             type:String,
             required:true,
-            //is this automatically connected to the user?
         },
         reactions: [reactionSchema],
 
