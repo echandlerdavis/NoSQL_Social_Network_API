@@ -4,6 +4,8 @@ module.exports = {
     //Get all users
     getUsers(req, res){
         User.find()
+        .populate('thoughts')
+        .populate('friends')
         .then(users => res.json(users))
         .catch((err) => res.status(500).json(err));
     },
@@ -56,7 +58,7 @@ module.exports = {
   },
   addFriend(req, res){User.findOneAndUpdate(
     { _id: req.params.userId },
-    { $addToSet: { tags: req.body } },
+    { $addToSet: { friends: req.params.friendId } },
     //can also do $push:
     { runValidators: true, new: true }
   )
@@ -71,7 +73,7 @@ module.exports = {
   removeFriend(req, res) {
     User.findOneAndUpdate(
       { _id: req.params.userId },
-      { $pull: { friends: { friendId: req.params.friendId } } },
+      { $pull: { friends: req.params.friendId } },
       { runValidators: true, new: true }
     )
       .then((user) =>

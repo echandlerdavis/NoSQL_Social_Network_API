@@ -15,8 +15,18 @@ const userSchema = new Schema(
             match: [/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/, 'Please add a valid email address']
             // figure out how to validate email adress.  
         },
-        thoughts: [{type: Schema.Types.ObjectId, ref: 'Thought'}],
-        friends: [{type: Schema.Types.ObjectId, ref:'User'}]
+        thoughts: [
+            {
+                type: Schema.Types.ObjectId, 
+                ref: 'Thought',
+            },
+        ],
+        friends: [
+            {
+                type: Schema.Types.ObjectId, 
+                ref:'User',
+            },
+        ]
 
     },
     {
@@ -32,8 +42,6 @@ userSchema.virtual('friendCount').get(function(){
 })
 
 const User = model('User', userSchema);
-
-// const handleError = (err) => console.error(err);
 
 
 module.exports = User;

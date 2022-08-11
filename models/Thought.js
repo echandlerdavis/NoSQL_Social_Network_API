@@ -1,18 +1,19 @@
 const { Schema, model } = require('mongoose');
-const reactionSchema = require('./Reaction')
+const reactionSchema = require('./Reaction');
+const moment = require('moment');
 
 const thoughtSchema = new Schema(
     {
         thoughtText: {
             type: String,
             required: true,
-            min: 1,
-            max: 280
+            minLength: 1,
+            maxLength: 280
         },
         createdAt: {
             type: Date, 
             default: Date.now,
-            //get: () => (use moment that returns the formatted date and time)
+            get: () => { return moment().format('MMM Do, YYYY, [at] hh:mm a')}
         },
         username: {
             type:String,
@@ -27,8 +28,6 @@ const thoughtSchema = new Schema(
         },
       }
 );
-
-//id false?
 
 thoughtSchema.virtual('reactionCount').get(function(){
     return this.reactions.length;
